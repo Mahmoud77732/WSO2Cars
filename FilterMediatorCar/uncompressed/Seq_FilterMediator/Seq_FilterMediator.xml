@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="Seq_FilterMediator" xmlns="http://ws.apache.org/ns/synapse">
+    <filter regex="1" source="//type" xmlns:ns="http://org.apache.synapse/xsd">
+        <then>
+            <log level="custom" separator=" ___ ">
+                <property name="Entity Type" value="1 - student"/>
+            </log>
+        </then>
+        <else>
+            <log level="custom" separator=" ___ ">
+                <property name="Entity Type" value="2 teacher"/>
+            </log>
+        </else>
+    </filter>
+    <respond/>
+</sequence>
+
