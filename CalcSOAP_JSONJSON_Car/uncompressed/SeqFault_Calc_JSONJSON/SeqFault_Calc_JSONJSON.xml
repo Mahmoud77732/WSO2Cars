@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="SeqFault_Calc_JSONJSON" xmlns="http://ws.apache.org/ns/synapse">
+    <log level="custom">
+        <property name="Separator6" value="********** faultSequence: **********"/>
+    </log>
+    <log level="full">
+        <property expression="get-property('ERROR_MESSAGE')"
+            name="FAULT" xmlns:ns="http://org.apache.synapse/xsd" xmlns:ns3="http://org.apache.synapse/xsd"/>
+    </log>
+    <respond/>
+</sequence>
+

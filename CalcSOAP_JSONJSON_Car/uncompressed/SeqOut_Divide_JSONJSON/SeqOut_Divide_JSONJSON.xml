@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="SeqOut_Divide_JSONJSON" xmlns="http://ws.apache.org/ns/synapse">
+    <log level="custom">
+        <property name="Separator4" value="********** outSequence: print the response payload **********"/>
+    </log>
+    <log level="full">
+        <property expression="$body" name="SOAP_Response" xmlns:ns="http://tempuri.org/"/>
+    </log>
+    <payloadFactory media-type="json">
+        <format>{"DivideResult": "$1"}</format>
+        <args>
+            <arg evaluator="xml"
+                expression="//ns:DivideResponse/ns:DivideResult"
+                literal="false" xmlns:ns="http://tempuri.org/"/>
+        </args>
+    </payloadFactory>
+    <log level="custom">
+        <property name="Separator5" value="********** print the payloadFactory results after converting xml to json **********"/>
+    </log>
+    <log level="full"/>
+    <respond/>
+</sequence>
+

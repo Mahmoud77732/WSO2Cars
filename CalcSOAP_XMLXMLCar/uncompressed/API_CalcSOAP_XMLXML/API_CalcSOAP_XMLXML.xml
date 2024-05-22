@@ -1,0 +1,4 @@
+<api xmlns="http://ws.apache.org/ns/synapse" name="API_CalcSOAP_XMLXML" context="/calc_xmlxml">
+   <resource methods="POST" uri-template="?op=Add" inSequence="Seq_Add_XMLXML" outSequence="Seq_OutSequence" faultSequence="fault"/>
+   <resource methods="POST" uri-template="?op=Divide" inSequence="Seq_Divide_XMLXML" outSequence="Seq_OutSequence" faultSequence="fault"/>
+</api>

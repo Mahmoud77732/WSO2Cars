@@ -1,0 +1,4 @@
+<api xmlns="http://ws.apache.org/ns/synapse" name="API_CalcSoap_JSONJSON" context="/calc_jsonjson">
+   <resource methods="POST" uri-template="?op=Add" inSequence="Seq_Add_JSONJSON" outSequence="SeqOut_Add_JSONJSON" faultSequence="SeqFault_Calc_JSONJSON"/>
+   <resource methods="POST" uri-template="?op=Divide" inSequence="SeqIn_Divide_JSONJSON" outSequence="SeqOut_Divide_JSONJSON" faultSequence="SeqFault_Calc_JSONJSON"/>
+</api>

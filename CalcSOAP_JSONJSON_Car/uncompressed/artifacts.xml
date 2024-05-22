@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?><artifacts>
+    <artifact name="CalcSOAP_JSONJSON_Car" type="carbon/application">
+        <dependency artifact="SeqIn_Divide_JSONJSON" include="true" serverRole="EnterpriseServiceBus"/>
+        <dependency artifact="SeqFault_Calc_JSONJSON" include="true" serverRole="EnterpriseServiceBus"/>
+        <dependency artifact="Seq_Add_JSONJSON" include="true" serverRole="EnterpriseServiceBus"/>
+        <dependency artifact="EP_DivideSOAP_JSONJSON" include="true" serverRole="EnterpriseServiceBus"/>
+        <dependency artifact="EP_AddSOAP_JSONJSON" include="true" serverRole="EnterpriseServiceBus"/>
+        <dependency artifact="API_CalcSoap_JSONJSON" include="true" serverRole="EnterpriseServiceBus"/>
+        <dependency artifact="SeqOut_Divide_JSONJSON" include="true" serverRole="EnterpriseServiceBus"/>
+        <dependency artifact="SeqOut_Add_JSONJSON" include="true" serverRole="EnterpriseServiceBus"/>
+    </artifact>
+</artifacts>

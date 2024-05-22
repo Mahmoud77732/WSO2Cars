@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="Seq_Divide_JSONXML" xmlns="http://ws.apache.org/ns/synapse">
+    <log level="full">
+        <property expression="json-eval($.intA)" name="intA" xmlns:ns="http://org.apache.synapse/xsd"/>
+        <property expression="json-eval($.intB)" name="intB" xmlns:ns="http://org.apache.synapse/xsd"/>
+    </log>
+    <payloadFactory media-type="xml">
+        <format>
+            <soap:Envelope
+                xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
+                xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+                <soap:Body>
+                    <Divide xmlns="http://tempuri.org/">
+                        <intA>$1</intA>
+                        <intB>$2</intB>
+                    </Divide>
+                </soap:Body>
+            </soap:Envelope>
+        </format>
+        <args>
+            <arg evaluator="json" expression="$.intA" literal="false"/>
+            <arg evaluator="json" expression="$.intB" literal="false"/>
+        </args>
+    </payloadFactory>
+    <property name="MESSAGE_TYPE" scope="axis2" type="STRING" value="text/xml; charset=utf-8"/>
+    <log level="full">
+        <property expression="$body" name="Result" xmlns:ns="http://org.apache.synapse/xsd"/>
+    </log>
+    <call>
+        <endpoint key="EP_DivideSoap12Service"/>
+    </call>
+    <respond/>
+</sequence>
+

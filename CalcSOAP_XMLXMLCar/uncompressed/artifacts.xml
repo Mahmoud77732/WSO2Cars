@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?><artifacts>
+    <artifact name="CalcSOAP_XMLXMLCar" type="carbon/application">
+        <dependency artifact="Seq_OutSequence" include="true" serverRole="EnterpriseServiceBus"/>
+        <dependency artifact="Seq_Divide_XMLXML" include="true" serverRole="EnterpriseServiceBus"/>
+        <dependency artifact="Seq_Add_XMLXML" include="true" serverRole="EnterpriseServiceBus"/>
+        <dependency artifact="EP_DivideSoapService" include="true" serverRole="EnterpriseServiceBus"/>
+        <dependency artifact="EP_AddSoapService" include="true" serverRole="EnterpriseServiceBus"/>
+        <dependency artifact="API_CalcSOAP_XMLXML" include="true" serverRole="EnterpriseServiceBus"/>
+    </artifact>
+</artifacts>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<api context="/wso2bills" name="API_AllBills" version="1.0" version-type="context" xmlns="http://ws.apache.org/ns/synapse">
+    <resource methods="GET">
+        <inSequence>
+            <call>
+                <endpoint key="EP_GetAllBills"/>
+            </call>
+            <respond/>
+        </inSequence>
+        <outSequence/>
+        <faultSequence/>
+    </resource>
+    <resource methods="GET" uri-template="/getById/{id}">
+        <inSequence>
+            <call>
+                <endpoint key="EP_GetBillById"/>
+            </call>
+            <respond/>
+        </inSequence>
+        <outSequence/>
+        <faultSequence/>
+    </resource>
+    <resource methods="POST" uri-template="/create">
+        <inSequence>
+            <log level="full"/>
+            <send buildmessage="true">
+                <endpoint key="EP_CreateBill"/>
+            </send>
+        </inSequence>
+        <outSequence>
+            <log level="full"/>
+            <send buildmessage="true"/>
+        </outSequence>
+        <faultSequence>
+            <log level="full"/>
+            <send buildmessage="true"/>
+        </faultSequence>
+    </resource>
+    <resource methods="DELETE" uri-template="/deleteById/{id}">
+        <inSequence>
+            <call>
+                <endpoint key="EP_DeleteBill"/>
+            </call>
+            <respond/>
+        </inSequence>
+        <outSequence/>
+        <faultSequence/>
+    </resource>
+    <resource methods="PUT" uri-template="/update/{id}">
+        <inSequence>
+            <call>
+                <endpoint key="EP_UpdateBill"/>
+            </call>
+            <respond/>
+        </inSequence>
+        <outSequence/>
+        <faultSequence/>
+    </resource>
+</api>

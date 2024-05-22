@@ -1,0 +1,3 @@
+<?xml version="1.0" encoding="UTF-8"?><artifact name="SeqOut_Divide_JSONJSON" type="synapse/sequence" serverRole="EnterpriseServiceBus">
+    <file>SeqOut_Divide_JSONJSON.xml</file>
+</artifact>

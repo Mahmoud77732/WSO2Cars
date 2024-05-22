@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="Seq_GetAllBills" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+    <call>
+        <endpoint key="EP_GetAllBills"/>
+    </call>
+    <log level="custom" separator=" ** ">
+        <property expression="$axis2:HTTP_SC" name="StatusCode"/>
+        <property expression="$axis2:HTTP_SC_DESC" name="StatusMessage"/>
+    </log>
+    <switch source="$axis2:HTTP_SC">
+        <case regex="404">
+            <log level="custom" separator=" ** ">
+                <property name="StatusCode" value="404"/>
+                <property expression="$axis2:HTTP_SC_DESC" name="StatusMessage"/>
+            </log>
+        </case>
+        <case regex="401">
+            <log level="custom" separator=" ** ">
+                <property name="StatusCode" value="401"/>
+                <property expression="$axis2:HTTP_SC_DESC" name="Statusmessage"/>
+            </log>
+        </case>
+        <case regex="500">
+            <log level="custom" separator=" ** ">
+                <property name="StatusCode" value="500"/>
+                <property expression="$axis2:HTTP_SC_DESC" name="Statusmessage"/>
+            </log>
+        </case>
+        <default/>
+    </switch>
+    <respond/>
+</sequence>

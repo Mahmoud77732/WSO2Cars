@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="Seq_Add_XMLXML" xmlns="http://ws.apache.org/ns/synapse">
+    <log level="full"/>
+    <property name="MESSAGE_TYPE" scope="axis2" type="STRING" value="text/xml; charset=utf-8"/>
+    <call>
+        <endpoint key="EP_AddSoapService"/>
+    </call>
+    <respond/>
+</sequence>

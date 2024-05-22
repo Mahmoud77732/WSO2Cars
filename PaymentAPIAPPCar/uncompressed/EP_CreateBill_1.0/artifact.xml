@@ -1,0 +1,3 @@
+<?xml version="1.0" encoding="UTF-8"?><artifact name="EP_CreateBill" version="1.0" type="synapse/endpoint" serverRole="EnterpriseServiceBus">
+    <file>EP_CreateBill-1.0.xml</file>
+</artifact>
