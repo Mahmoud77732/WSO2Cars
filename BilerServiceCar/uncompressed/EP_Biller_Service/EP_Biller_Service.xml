@@ -1,5 +1,5 @@
 <endpoint xmlns="http://ws.apache.org/ns/synapse" name="EP_Biller_Service">
-   <address uri="http://10.198.54.13:9222/services/PaymentGateway/Subscriber/" format="soap11">
+   <address uri="http://localhost:8080/ws" format="soap11">
       <suspendOnFailure>
          <progressionFactor>1.0</progressionFactor>
       </suspendOnFailure>
