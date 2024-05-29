@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="Seq_Biller_Inquery_Response"
+    onError="Seq_BillerService_Fault" xmlns="http://ws.apache.org/ns/synapse">
+    <log level="custom">
+        <property name="log_1_Seq_Biller_Inquery" value=" *******Seq_Biller_Inquery_Response******* "/>
+    </log>
+    <log level="full">
+        <property name="Log2_Seq_Biller_Inquery" value="**requestBody**"/>
+    </log>
+    <payloadFactory media-type="xml">
+        <format>
+            <ExternalServiceResponse>
+                <EXTTxnID>$1</EXTTxnID>
+                <TransactionTimeStamp>$2</TransactionTimeStamp>
+                <Status>svc:$3</Status>
+                <Message>$4</Message>
+                <xparam>
+                    <param>
+                        <key>ClientID</key>
+                        <value>$5</value>
+                    </param>
+                    <param>
+                        <key>Fees</key>
+                        <value>$6</value>
+                    </param>
+                    <param>
+                        <key>GLEPayAmount</key>
+                        <value>$7</value>
+                    </param>
+                    <param>
+                        <key>customerWalletProfile</key>
+                        <value>$8</value>
+                    </param>
+                </xparam>
+            </ExternalServiceResponse>
+        </format>
+        <args>
+            <arg evaluator="xml" expression="//ns0:TransactionID"
+                literal="false" xmlns:ns="http://org.apache.synapse/xsd" xmlns:ns0="http://www.etisalat.com.eg/services/PaymentGateway/Subscriber/ExecuteService/xsd/v1"/>
+            <arg evaluator="xml"
+                expression="get-property('SYSTEM_DATE', 'yyyy-MM-dd HH:mm:ss.SSS')"
+                literal="false" xmlns:ns="http://org.apache.synapse/xsd" xmlns:ns0="http://www.etisalat.com.eg/services/PaymentGateway/Subscriber/ExecuteService/xsd/v1"/>
+            <arg evaluator="xml" expression="//ns1:errorCode"
+                literal="false" xmlns:ns="http://org.apache.synapse/xsd" xmlns:ns1="http://etisalat.com.eg/EMF/MessageResponseHeaderV1.0.xsd"/>
+            <arg evaluator="xml" expression="//ns1:errorMSG"
+                literal="false" xmlns:ns="http://org.apache.synapse/xsd" xmlns:ns1="http://etisalat.com.eg/EMF/MessageResponseHeaderV1.0.xsd"/>
+            <arg evaluator="xml" expression="//ns0:ClientID"
+                literal="false" xmlns:ns="http://org.apache.synapse/xsd" xmlns:ns0="http://www.etisalat.com.eg/services/PaymentGateway/Subscriber/ExecuteService/xsd/v1"/>
+            <arg evaluator="xml" expression="//ns0:Fees" literal="false"
+                xmlns:ns="http://org.apache.synapse/xsd" xmlns:ns0="http://www.etisalat.com.eg/services/PaymentGateway/Subscriber/ExecuteService/xsd/v1"/>
+            <arg evaluator="xml" expression="//ns0:Amount"
+                literal="false" xmlns:ns="http://org.apache.synapse/xsd" xmlns:ns0="http://www.etisalat.com.eg/services/PaymentGateway/Subscriber/ExecuteService/xsd/v1"/>
+            <arg evaluator="xml"
+                expression="//ns0:customerWalletProfile" literal="false"
+                xmlns:ns="http://org.apache.synapse/xsd" xmlns:ns0="http://www.etisalat.com.eg/services/PaymentGateway/Subscriber/ExecuteService/xsd/v1"/>
+        </args>
+    </payloadFactory>
+    <log level="full">
+        <property name="FinalLog_Seq_Biller_Inquery" value="**Full_Log**"/>
+    </log>
+    <respond/>
+</sequence>
+

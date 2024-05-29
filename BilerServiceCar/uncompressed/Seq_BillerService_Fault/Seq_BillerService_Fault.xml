@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="Seq_BillerService_Fault" xmlns="http://ws.apache.org/ns/synapse">
+    <log level="custom">
+        <property name="property_name" value="Entering Aman Cash Fault Sequence"/>
+    </log>
+    <property expression="get-property('ERROR_MESSAGE')" name="message"
+        scope="default" type="STRING" xmlns:ns="http://org.apache.synapse/xsd"/>
+    <property expression="get-property('ERROR_CODE')" name="code"
+        scope="default" type="STRING" xmlns:ns="http://org.apache.synapse/xsd"/>
+    <property expression="get-property('ERROR_DETAIL')" name="detail"
+        scope="default" type="STRING" xmlns:ns="http://org.apache.synapse/xsd"/>
+    <property expression="get-property('ERROR_EXCEPTION')"
+        name="exception" scope="default" type="STRING" xmlns:ns="http://org.apache.synapse/xsd"/>
+    <log level="custom">
+        <property expression="get-property('ERROR_MESSAGE')"
+            name="message" xmlns:ns="http://org.apache.synapse/xsd"/>
+        <property expression="get-property('ERROR_CODE')" name="code" xmlns:ns="http://org.apache.synapse/xsd"/>
+        <property expression="get-property('ERROR_DETAIL')"
+            name="detail" xmlns:ns="http://org.apache.synapse/xsd"/>
+        <property expression="get-property('ERROR_EXCEPTION')"
+            name="exception" xmlns:ns="http://org.apache.synapse/xsd"/>
+    </log>
+    <payloadFactory media-type="xml">
+        <format>
+            <ExternalServiceResponse xmlns="">
+                <EXTTxnID>$1</EXTTxnID>
+                <TransactionTimeStamp>$2</TransactionTimeStamp>
+                <Status>esb:$3</Status>
+                <Message>$4</Message>
+                <MultiOptions/>
+                <xparams/>
+            </ExternalServiceResponse>
+        </format>
+        <args>
+            <arg evaluator="xml" expression="//GLETxnID" literal="false" xmlns:ns="http://org.apache.synapse/xsd"/>
+            <arg evaluator="xml"
+                expression="get-property('SYSTEM_DATE', 'yyyy-MM-dd HH:mm:ss.SSS')"
+                literal="false" xmlns:ns="http://org.apache.synapse/xsd"/>
+            <arg evaluator="xml" expression="get-property('code')"
+                literal="false" xmlns:ns="http://org.apache.synapse/xsd"/>
+            <arg evaluator="xml" expression="get-property('message')"
+                literal="false" xmlns:ns="http://org.apache.synapse/xsd"/>
+        </args>
+    </payloadFactory>
+    <property name="messageType" scope="axis2" type="STRING" value="application/xml"/>
+    <log level="full"/>
+    <respond/>
+</sequence>
+

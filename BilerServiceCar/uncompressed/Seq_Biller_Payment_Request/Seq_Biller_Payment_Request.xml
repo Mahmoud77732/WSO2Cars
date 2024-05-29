@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="Seq_Biller_Payment_Request"
+    onError="Seq_BillerService_Fault" xmlns="http://ws.apache.org/ns/synapse">
+    <log level="custom">
+        <property name="log_1_Seq_Biller_Payment" value=" *******Seq_Biller_Payment_Request******* "/>
+    </log>
+    <log level="full">
+        <property name="Log2_Seq_Biller_Payment" value="**requestBody**"/>
+    </log>
+    <payloadFactory media-type="xml">
+        <format>
+            <soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+                <soap:Body>
+                    <ExecuteServiceRequest
+                        xmlns="http://www.etisalat.com.eg/services/PaymentGateway/Subscriber/ExecuteService/xsd/v1"
+                        xmlns:ns2="http://etisalat.com.eg/EMF/MessageResponseHeaderV1.0.xsd"
+                        xmlns:ns3="http://etisalat.com.eg/EMF/MessageRequestHeaderV1.0.xsd"
+                        xmlns:ns4="http://www.etisalat.com.eg/schemas/PaymentGateway/Common/v1" xmlns:ns5="http://www.etisalat.com.eg/schemas/CDM/Common/v1">
+                        <RequestBody>
+                            <QueryTrxID>$1</QueryTrxID>
+                            <AuthKey>ammanKey</AuthKey>
+                            <ServiceCode>719</ServiceCode>
+                            <ClientLanguageID>2</ClientLanguageID>
+                        </RequestBody>
+                    </ExecuteServiceRequest>
+                </soap:Body>
+            </soap:Envelope>
+        </format>
+        <args>
+            <arg evaluator="xml" expression="//bill_reference_number"
+                literal="false" xmlns:ns="http://org.apache.synapse/xsd"/>
+        </args>
+    </payloadFactory>
+    <property name="CAIssuer" scope="transport" type="STRING" value="GW_AMAN"/>
+    <property name="SerialNumber" scope="transport" type="STRING" value="GW_AMAN123"/>
+    <property name="SOAPAction" scope="transport" type="STRING" value="/services/Payment/Subscriber/ExecuteService"/>
+    <property name="operationName" scope="axis2" type="STRING" value="ExecuteService"/>
+    <property name="operationNamespace" scope="axis2" type="STRING" value="http://www.etisalat.com.eg/services/PaymentGateway/Subscriber/Service/v1"/>
+    <property name="messageType" scope="axis2" value="text/xml"/>
+    <property name="Content-Type" scope="axis2" type="STRING" value="text/xml; charset=utf-8"/>
+    <property name="CamelSoapAction" scope="transport" type="STRING" value="/services/Payment/Subscriber/ExecuteService"/>
+    <log level="full"/>
+    <call>
+        <endpoint key="EP_Biller_Service"/>
+    </call>
+</sequence>
+

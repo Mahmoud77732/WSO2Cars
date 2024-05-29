@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?><artifacts>
+    <artifact name="BillerService_Car" type="carbon/application">
+        <dependency artifact="API_BillerService" include="true" serverRole="EnterpriseServiceBus"/>
+        <dependency artifact="EP_Biller_Service" include="true" serverRole="EnterpriseServiceBus"/>
+        <dependency artifact="Seq_Biller_Inquery_Request" include="true" serverRole="EnterpriseServiceBus"/>
+        <dependency artifact="Seq_Biller_Inquery_Response" include="true" serverRole="EnterpriseServiceBus"/>
+        <dependency artifact="Seq_BillerMain" include="true" serverRole="EnterpriseServiceBus"/>
+        <dependency artifact="Seq_Biller_Payment_Request" include="true" serverRole="EnterpriseServiceBus"/>
+        <dependency artifact="Seq_Biller_Payment_Response" include="true" serverRole="EnterpriseServiceBus"/>
+        <dependency artifact="Seq_BillerService_Fault" include="true" serverRole="EnterpriseServiceBus"/>
+    </artifact>
+</artifacts>

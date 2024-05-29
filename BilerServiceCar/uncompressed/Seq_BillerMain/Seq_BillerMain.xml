@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="Seq_BillerMain" onError="Seq_BillerService_Fault" xmlns="http://ws.apache.org/ns/synapse">
+    <log level="full">
+        <property expression="get-property('sequenceType')"
+            name="sequenceType" xmlns:ns="http://org.apache.synapse/xsd"/>
+    </log>
+    <switch source="get-property('sequenceType')" xmlns:ns="http://org.apache.synapse/xsd">
+        <case regex="^aman-bill-inquiry$">
+            <sequence key="Seq_Biller_Inquery_Request"/>
+            <sequence key="Seq_Biller_Inquery_Response"/>
+        </case>
+        <case regex="^aman-bill-payment$">
+            <sequence key="Seq_Biller_Payment_Request"/>
+            <sequence key="Seq_Biller_Payment_Response"/>
+        </case>
+        <default>
+            <log level="custom">
+                <property name="Log1_Seq_BillerMain_switch_default" value="Unknown sequenceType"/>
+            </log>
+            <payloadFactory media-type="xml">
+                <format>
+                    <ExternalServiceResponse xmlns="">
+                        <EXTTxnID>$1</EXTTxnID>
+                        <TransactionTimeStamp>$2</TransactionTimeStamp>
+                        <Status>esb:INVALID_SEQUENCE</Status>
+                        <Message>Invalid sequence type</Message>
+                        <MultiOptions/>
+                        <xparams/>
+                    </ExternalServiceResponse>
+                </format>
+                <args>
+                    <arg evaluator="xml" expression="//GLETxnID" literal="false"/>
+                    <arg evaluator="xml"
+                        expression="get-property('SYSTEM_DATE', 'yyyy-MM-dd HH:mm:ss.SSS')" literal="false"/>
+                </args>
+            </payloadFactory>
+            <property name="messageType" scope="axis2" type="STRING" value="application/xml"/>
+            <respond/>
+        </default>
+    </switch>
+</sequence>
+

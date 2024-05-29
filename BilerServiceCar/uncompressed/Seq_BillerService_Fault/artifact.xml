@@ -1,0 +1,3 @@
+<?xml version="1.0" encoding="UTF-8"?><artifact name="Seq_BillerService_Fault" type="synapse/sequence" serverRole="EnterpriseServiceBus">
+    <file>Seq_BillerService_Fault.xml</file>
+</artifact>

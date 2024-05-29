@@ -1,0 +1,12 @@
+<endpoint xmlns="http://ws.apache.org/ns/synapse" name="EP_Biller_Service">
+   <address uri="http://10.198.54.13:9222/services/PaymentGateway/Subscriber/" format="soap11">
+      <suspendOnFailure>
+         <progressionFactor>1.0</progressionFactor>
+      </suspendOnFailure>
+      <markForSuspension>
+         <retriesBeforeSuspension>0</retriesBeforeSuspension>
+         <retryDelay>0</retryDelay>
+      </markForSuspension>
+   </address>
+</endpoint>
+                        

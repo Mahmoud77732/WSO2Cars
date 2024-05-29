@@ -1,0 +1,3 @@
+<?xml version="1.0" encoding="UTF-8"?><artifact name="Seq_Biller_Inquery_Request" type="synapse/sequence" serverRole="EnterpriseServiceBus">
+    <file>Seq_Biller_Inquery_Request.xml</file>
+</artifact>

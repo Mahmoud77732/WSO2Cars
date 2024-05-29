@@ -1,0 +1,70 @@
+<api xmlns="http://ws.apache.org/ns/synapse" name="API_BillerService" context="/billerService">
+   <resource methods="POST">
+      <inSequence>
+         <throttle id="group_id">
+            <policy>
+               <wsp:Policy xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" wsu:id="WSO2MediatorThrottlingPolicy">                                                                                                                  
+                  <throttle:MediatorThrottleAssertion xmlns:throttle="http://www.wso2.org/products/wso2commons/throttle">                                                                                                                                     
+                     <throttle:MaximumConcurrentAccess>0</throttle:MaximumConcurrentAccess>                                                                                                                                     
+                     <wsp:Policy>                                                                                                                                                        
+                        <throttle:ID throttle:type="IP">other</throttle:ID>                                                                                                                                                        
+                        <wsp:Policy>                                                                                                                                                                           
+                           <throttle:Control>                                                                                                                                                                                              
+                              <wsp:Policy>                                                                                                                                                                                                                 
+                                 <throttle:MaximumCount>50</throttle:MaximumCount>                                                                                                                                                                                                                 
+                                 <throttle:UnitTime>1000</throttle:UnitTime>                                                                                                                                                                                                                 
+                                 <throttle:ProhibitTimePeriod>0</throttle:ProhibitTimePeriod>                                                                                                                                                                                              
+                              </wsp:Policy>                                                                                                                                                                           
+                           </throttle:Control>                                                                                                                                                        
+                        </wsp:Policy>                                                                                                                                     
+                     </wsp:Policy>                                                                                                                  
+                  </throttle:MediatorThrottleAssertion>                                                                                               
+               </wsp:Policy>
+            </policy>
+            <onReject>
+               <log level="custom">
+                  <property name="Log_API_Reject" value="**********************"/>
+               </log>
+               <payloadFactory media-type="xml">
+                  <format>
+                     <ExternalServiceResponse xmlns="">
+                        <EXTTxnID>$1</EXTTxnID>
+                        <TransactionTimeStamp>$2</TransactionTimeStamp>
+                        <Status>esb:1</Status>
+                        <Message>Exceeding Rate Limit</Message>
+                        <Param1/>
+                        <Param2/>
+                        <Param3/>
+                     </ExternalServiceResponse>
+                  </format>
+                  <args>
+                     <arg evaluator="xml" expression="$body/ExternalServiceRequest/GLETxnID"/>
+                     <arg evaluator="xml" expression="get-property('SYSTEM_DATE', 'yyyy-MM-dd HH:mm:ss.SSS')"/>
+                  </args>
+               </payloadFactory>
+               <property name="HTTP_SC" value="429" scope="axis2" type="STRING"/>
+               <property name="messageType" value="application/xml" scope="axis2" type="STRING" description="MessageType"/>
+               <respond/>
+            </onReject>
+            <onAccept>
+               <log level="custom">
+                  <property name="Log_API_Accept" value="**********************"/>
+               </log>
+               <property name="sequenceType" expression="//ExternalServiceRequest/InjectedParams/service_extra_param/sequence_type/text()" scope="default" type="STRING"/>
+               <log level="custom">
+                  <property name="Log_1_onAccept_API_BillerService_sequenceType" expression="get-property('sequenceType')"/>
+               </log>
+               <sequence key="Seq_BillerMain"/>
+            </onAccept>
+         </throttle>
+      </inSequence>
+      <outSequence>
+         <send/>
+      </outSequence>
+      <faultSequence>
+         <sequence key="Seq_BillerService_Fault"/>
+         <respond/>
+      </faultSequence>
+   </resource>
+</api>
+                        
