@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <sequence name="Seq_BillerService_Fault" xmlns="http://ws.apache.org/ns/synapse">
     <log level="custom">
-        <property name="property_name" value="Entering Aman Cash Fault Sequence"/>
+        <property name="property_name" value="Entering Fault Sequence"/>
     </log>
     <property expression="get-property('ERROR_MESSAGE')" name="message"
         scope="default" type="STRING" xmlns:ns="http://org.apache.synapse/xsd"/>
